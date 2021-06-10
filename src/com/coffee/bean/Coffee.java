@@ -3,8 +3,6 @@ package com.coffee.bean;
 public class Coffee {
 	private String coffeeName;
 	private int coffeePrice,coffeeId;
-
-
 	public int getCoffeeId() {
 		return coffeeId;
 	}
