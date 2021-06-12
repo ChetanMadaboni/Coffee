@@ -1,24 +1,29 @@
 package com.coffee.presentation;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.coffee.bean.AddOns;
 import com.coffee.bean.Coffee;
 import com.coffee.bean.Customer;
+import com.coffee.bean.Order;
 import com.coffee.bean.Size;
 import com.coffee.helper.CustomerInputOutput;
 import com.coffee.service.CoffeeService;
 import com.coffee.service.CoffeeServiceImpli;
+import com.coffee.service.OrderService;
+import com.coffee.service.OrderServiceImpli;
 
 
 public class CoffeePresentationImpli implements CoffeePresentation {
 	private CoffeeService coffeeService=new CoffeeServiceImpli();
-
+	private OrderService orderService =new OrderServiceImpli();
+	Customer c1=CustomerInputOutput.inputCustomer();;
 	@Override
 	public void checkCustomer() {
 			try {
-				Customer c1=CustomerInputOutput.inputCustomer();
+				
 				Customer c=coffeeService.checkCustomer(c1);
 				if(c.getCustomerName()!=null) {
 					System.out.println("Welcome Back to StarBucks! "+c.getCustomerName());
@@ -75,6 +80,18 @@ public class CoffeePresentationImpli implements CoffeePresentation {
 		}
 		for(Size s:sizes) {
 			System.out.println(" "+s.getSizeid()+" "+s.getSizename()+" "+s.getSizeprice());
+		}
+		
+	}
+
+	@Override
+	public void orderEntry(ArrayList<Order> orders) {
+		String name=c1.getCustomerName();
+		try {
+			orderService.orderEntry(orders,name);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

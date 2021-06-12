@@ -32,5 +32,10 @@ public class Coffee {
 	public void setCoffeePrice(int coffeePrice) {
 		this.coffeePrice = coffeePrice;
 	}
+
+	@Override
+	public String toString() {
+		return "Coffee [coffeeName=" + coffeeName + ", coffeePrice=" + coffeePrice + "]";
+	}
 	
 }
