@@ -52,7 +52,7 @@ public class OrderDaoImpli implements OrderDao{
 		billstatement.setInt(5,row);
 		billstatement.executeUpdate();
 		total+=row;
-		System.out.println("  "+coffee.getCoffeeName()+"  "+addon.getName()+"  "+size.getSizename()+"  "+row);
+		//System.out.println("  "+coffee.getCoffeeName()+"  "+addon.getName()+"  "+size.getSizename()+"  "+row);
 	}
 		
 	}
