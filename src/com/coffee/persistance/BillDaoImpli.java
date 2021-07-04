@@ -28,9 +28,10 @@ public class BillDaoImpli implements BillDao {
 			bill = new Bill();
 			bill.setCustomerName(resultset.getString("customername"));
 			bill.setCoffeeName(resultset.getString("coffeename"));
-			bill.setAddOn(resultset.getString("addonname"));
+			//bill.setAddOn(resultset.getString("addonname"));
 			bill.setSize(resultset.getString("sizename"));
 			bill.setPrice(resultset.getInt("coffeeprice"));
+			bill.setDate(resultset.getString("datedetails"));
 			bills.add(bill);
 		}
 

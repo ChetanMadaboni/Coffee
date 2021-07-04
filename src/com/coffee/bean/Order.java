@@ -1,18 +1,31 @@
 package com.coffee.bean;
 
+import java.util.ArrayList;
+
 public class Order {
 	private int coffeeid,addonid,sizeid;
-	
+	private ArrayList<AddOnsOrder> addonsorder;
+	public ArrayList<AddOnsOrder> getAddonsorder() {
+		return addonsorder;
+	}
+
+
+	public void setAddonsorder(ArrayList<AddOnsOrder> addonsorder) {
+		this.addonsorder = addonsorder;
+	}
+
+
 	public Order(){
 		
 	}
 	
 
-	public Order(int coffeeid, int addonid, int sizeid) {
+	public Order(int coffeeid, int sizeid,ArrayList<AddOnsOrder> addonsorder) {
 		super();
 		this.coffeeid = coffeeid;
-		this.addonid = addonid;
+		//this.addonid = addonid;
 		this.sizeid = sizeid;
+		this.addonsorder=addonsorder;
 	}
 
 	public int getCoffeeid() {
@@ -22,14 +35,14 @@ public class Order {
 	public void setCoffeeid(int coffeeid) {
 		this.coffeeid = coffeeid;
 	}
-
-	public int getAddonid() {
-		return addonid;
-	}
-
-	public void setAddonid(int addonid) {
-		this.addonid = addonid;
-	}
+//
+//	public int getAddonid() {
+//		return addonid;
+//	}
+//
+//	public void setAddonid(int addonid) {
+//		this.addonid = addonid;
+//	}
 
 	public int getSizeid() {
 		return sizeid;
