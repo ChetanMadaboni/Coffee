@@ -145,11 +145,11 @@ public class CoffeePresentationImpli implements CoffeePresentation {
 	}
 
 	@Override
-	public void getBill(Voucher voucher) {
+	public void getBill(Voucher voucher,ArrayList<ArrayList<AddOnsOrder>> arrs) {
 				
 		ArrayList<Object> arr;
 		try {
-			arr = billService.getBill(voucher);
+			arr = billService.getBill(voucher,arrs);
 			System.out.println();
 			System.out.println(" Final Bill Invoice: ");
 			System.out.println(" Total value: "+arr.get(0));
@@ -179,7 +179,7 @@ public class CoffeePresentationImpli implements CoffeePresentation {
 		System.out.println();
 		for(Bill b:bills) {
 			//total+=b.getPrice();
-			System.out.println(" "+b.getCoffeeName()+" "+" "+b.getSize()+" "+b.getPrice()+" "+b.getDate());
+			System.out.println(" "+b.getCoffeeName()+" "+b.getAddOn()+" "+b.getSize()+" "+b.getPrice()+" "+b.getDate());
 		}
 		
 	}
@@ -198,6 +198,12 @@ public class CoffeePresentationImpli implements CoffeePresentation {
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void setAddonStatus() throws ClassNotFoundException, SQLException {
+		
+		billService.setAddonStatus();
 	}
 
 	

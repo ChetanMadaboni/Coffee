@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.coffee.bean.AddOns;
 import com.coffee.bean.AddOnsOrder;
@@ -28,16 +29,22 @@ public class OrderDaoImpli implements OrderDao{
 			coffee.setCoffeePrice(rs.getInt("coffeeprice"));
 		}
 		int total=0;
+		HashMap<Integer,String> hm=new HashMap<Integer,String>();
 		for(AddOnsOrder add:order.getAddonsorder()) {
 		PreparedStatement addstatement = connection.prepareStatement("select * from addons where addonid=?");
 		AddOns addon=new AddOns();	
 		addstatement.setInt(1,add.getAddonid());
 		rs=addstatement.executeQuery();
-		
 		while(rs.next()) {
 			total+=rs.getInt("addonprice");
+			if(hm.containsKey(add.getCoffeeid())) {
+				hm.put(add.getCoffeeid(), hm.get(add.getCoffeeid())+" "+rs.getString("addonname"));
+			}else {
+				hm.put(add.getCoffeeid(), rs.getString("addonname"));
+			}
 		}
 		}
+		//System.out.println(hm);
 		PreparedStatement sizestatement = connection.prepareStatement("select * from size where sizeid=?");
 		Size size=new Size();
 		sizestatement.setInt(1,order.getSizeid());
@@ -49,7 +56,7 @@ public class OrderDaoImpli implements OrderDao{
 		PreparedStatement billstatement = connection.prepareStatement("insert into bill (customername,coffeename,coffeeid,sizename,coffeeprice,datedetails) values (?,?,?,?,?,CURRENT_TIMESTAMP)");
 		billstatement.setString(1,name);
 		billstatement.setString(2, coffee.getCoffeeName());
-		billstatement.setInt(3, coffee.getCoffeeId());
+		billstatement.setInt(3, order.getCoffeeid());
 		billstatement.setString(4,size.getSizename());
 		billstatement.setInt(5,coffee.getCoffeePrice()+size.getSizeprice()+total);
 		billstatement.executeUpdate();

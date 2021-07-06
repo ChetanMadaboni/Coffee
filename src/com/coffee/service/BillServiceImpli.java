@@ -1,9 +1,10 @@
 package com.coffee.service;
 
-import java.sql.SQLException;
+import java.sql.SQLException; 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.coffee.bean.AddOnsOrder;
 import com.coffee.bean.Bill;
 import com.coffee.bean.Voucher;
 import com.coffee.persistance.BillDaoImpli;
@@ -11,7 +12,7 @@ import com.coffee.persistance.BillDaoImpli;
 public class BillServiceImpli implements BillService {
 	private BillDaoImpli billdaoimpli=new BillDaoImpli();
 	@Override
-	public ArrayList getBill(Voucher voucher) throws SQLException, ClassNotFoundException {
+	public ArrayList getBill(Voucher voucher,ArrayList<ArrayList<AddOnsOrder>> arrs) throws SQLException, ClassNotFoundException {
 		//return billdaoimpli.getBill();
 		Collection<Bill> bill=billdaoimpli.getBill();
 		Integer total=0;
@@ -43,6 +44,12 @@ public class BillServiceImpli implements BillService {
 		// TODO Auto-generated method stub
 		return billdaoimpli.getBill();
 	}
+	@Override
+	public void setAddonStatus() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		billdaoimpli.setAddonStatus();
+	}
+	
 	
 
 }

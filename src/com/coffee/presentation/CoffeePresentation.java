@@ -17,6 +17,7 @@ public interface CoffeePresentation {
 	void orderEntry(ArrayList<Order> orders);
 	Voucher checkVoucher(String vouchername);
 	void displayBillDetails();
-	void getBill(Voucher voucher);
+	void getBill(Voucher voucher,ArrayList<ArrayList<AddOnsOrder>> arr);
 	void setStatus() throws ClassNotFoundException, SQLException;
+	void setAddonStatus() throws ClassNotFoundException, SQLException;
 }

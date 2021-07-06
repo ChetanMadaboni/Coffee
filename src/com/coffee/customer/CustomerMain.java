@@ -88,9 +88,15 @@ public class CustomerMain {
 		cp.addonsEntry(addonsarr);
 		cp.orderEntry(arr);
 		cp.displayBillDetails();
-		cp.getBill(voucher);
+		cp.getBill(voucher,addonsarr);
 		try {
 			cp.setStatus();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			cp.setAddonStatus();
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

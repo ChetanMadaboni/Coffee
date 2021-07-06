@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
+import com.coffee.bean.AddOnsOrder;
 import com.coffee.bean.Bill;
 import com.coffee.bean.Coffee;
 import com.coffee.helper.MYSQLConnection;
@@ -15,8 +17,21 @@ public class BillDaoImpli implements BillDao {
 
 	@Override
 	public Collection<Bill> getBill() throws SQLException, ClassNotFoundException {
-		ArrayList<Bill> bills = null;
 		Connection connection = MYSQLConnection.getConnection();
+		PreparedStatement state=connection.prepareStatement("select * from orderaddons where status=0");
+		ResultSet rs = state.executeQuery();
+		HashMap<Integer,String> hm=new HashMap<Integer,String>();
+		
+		while (rs.next()) {
+			if(hm.containsKey(rs.getInt("cid"))) {
+				hm.put(rs.getInt("cid"), hm.get(rs.getInt("cid"))+" "+rs.getString("addon"));
+			}else {
+				hm.put(rs.getInt("cid"), rs.getString("addon"));
+			}
+		}
+		//System.out.println(hm);
+		ArrayList<Bill> bills = null;
+	
 
 		PreparedStatement statement = connection.prepareStatement("select * from bill where status=0");
 		ResultSet resultset = statement.executeQuery();
@@ -32,6 +47,7 @@ public class BillDaoImpli implements BillDao {
 			bill.setSize(resultset.getString("sizename"));
 			bill.setPrice(resultset.getInt("coffeeprice"));
 			bill.setDate(resultset.getString("datedetails"));
+			bill.setAddOn(hm.get(resultset.getInt("coffeeid")));
 			bills.add(bill);
 		}
 
@@ -39,7 +55,7 @@ public class BillDaoImpli implements BillDao {
 
 		return bills;
 	}
-
+	
 	@Override
 	public void setStatus() throws ClassNotFoundException, SQLException {
 		Connection connection = MYSQLConnection.getConnection();
@@ -48,6 +64,18 @@ public class BillDaoImpli implements BillDao {
 		int n  = statement.executeUpdate();
 		connection.close();
 	}
+
+	@Override
+	public void setAddonStatus() throws ClassNotFoundException, SQLException {
+		Connection connection = MYSQLConnection.getConnection();
+
+		PreparedStatement statement = connection.prepareStatement("update orderaddons set status=1 where status=0");
+		int n  = statement.executeUpdate();
+		connection.close();
+		
+	}
+
+	
 
 
 }

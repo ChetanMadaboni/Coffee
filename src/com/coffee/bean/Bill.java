@@ -7,10 +7,10 @@ public class Bill {
 	public Bill() {
 		
 	}
-	public Bill(String customerName,String coffeeName, String size, int price,String date) {
+	public Bill(String customerName,String coffeeName,String addOn,String size, int price,String date) {
 		super();
 		this.coffeeName = coffeeName;
-		///this.addOn = addOn;
+		this.addOn = addOn;
 		this.size = size;
 		this.price = price;
 		this.customerName=customerName;
@@ -22,12 +22,12 @@ public class Bill {
 	public void setCoffeeName(String coffeeName) {
 		this.coffeeName = coffeeName;
 	}
-//	public String getAddOn() {
-//		return addOn;
-//	}
-//	public void setAddOn(String addOn) {
-//		this.addOn = addOn;
-//	}
+	public String getAddOn() {
+		return addOn;
+	}
+	public void setAddOn(String addOn) {
+		this.addOn = addOn;
+	}
 	public String getSize() {
 		return size;
 	}

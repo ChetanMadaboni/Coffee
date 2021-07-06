@@ -9,7 +9,6 @@ public class Order {
 		return addonsorder;
 	}
 
-
 	public void setAddonsorder(ArrayList<AddOnsOrder> addonsorder) {
 		this.addonsorder = addonsorder;
 	}
